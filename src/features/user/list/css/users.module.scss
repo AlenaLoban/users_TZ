@@ -1,0 +1,37 @@
+.users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 60px;
+  &__button {
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+
+    &__btn {
+      div {
+        padding: 8px 16px;
+        display: flex;
+        justify-content: center;
+        place-content: center;
+        gap: 8px;
+        p {
+          font-size: 16px;
+        }
+        img {
+          align-self: center;
+          display: inline-block;
+          width: 17.41px;
+          height: 9.17px;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
+.box {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, 305px);
+  justify-content: center;
+}
