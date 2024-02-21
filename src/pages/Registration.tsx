@@ -18,7 +18,7 @@ const Regestration: React.FC = () => {
             )}
             onClick={() => setShowLog(false)}
           >
-            Pегистрация
+            Регистрация
           </div>
           <div
             className={cn(

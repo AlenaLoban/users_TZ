@@ -5,8 +5,12 @@ import notLike from "/notLike.png";
 import like from "/like.png";
 import { useNavigate } from "react-router-dom";
 
+let arrId = localStorage.getItem("usersIsLike")
+  ? [...JSON.parse(localStorage.getItem("usersIsLike") || "")]
+  : [];
+
 const User: React.FC<IUser> = (props) => {
-  const [isLike, setIsLike] = useState(false);
+  const [arrLike, setArrLike] = useState<number[]>(arrId);
   const { avatar, first_name, last_name, id } = props;
   const navigate = useNavigate();
 
@@ -14,8 +18,15 @@ const User: React.FC<IUser> = (props) => {
     navigate(`/catalog/${id}`);
     window.scroll(0, 0);
   };
-  const handleSetLike = () => {
-    setIsLike(!isLike);
+
+  const handleSetLike = (id: number) => {
+    if (arrId.includes(id)) {
+      arrId = arrId.filter((i) => i !== id);
+    } else {
+      arrId = [...arrId, id];
+    }
+    setArrLike(arrId);
+    localStorage.setItem("usersIsLike", JSON.stringify(arrId));
   };
 
   return (
@@ -26,8 +37,8 @@ const User: React.FC<IUser> = (props) => {
           {first_name} {last_name}
         </h2>
       </div>
-      <div className={styles.card__like} onClick={handleSetLike}>
-        <img src={isLike ? like : notLike} alt="like" />
+      <div className={styles.card__like} onClick={() => handleSetLike(id)}>
+        <img src={arrLike.includes(id) ? like : notLike} alt="like" />
       </div>
     </div>
   );
